@@ -2,6 +2,7 @@ package com.soliddowant.gregtechenergistics.gui.widgets;
 
 import gregtech.api.gui.GuiTextures;
 import gregtech.api.gui.IRenderContext;
+import gregtech.api.gui.resources.IGuiTexture;
 import gregtech.api.gui.resources.TextureArea;
 import gregtech.api.gui.widgets.SlotWidget;
 import gregtech.api.util.Position;
@@ -23,7 +24,7 @@ public class BackgroundSlotWidget extends SlotWidget {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void drawInBackground(int mouseX, int mouseY, IRenderContext context) {
+    public void drawInBackground(int mouseX, int mouseY, float partialTicks, IRenderContext context) {
         if(!isEnabled())
             return;
 
@@ -35,7 +36,7 @@ public class BackgroundSlotWidget extends SlotWidget {
         if(backgroundTexture == null)
             return;
 
-        for (TextureArea backgroundTexture : this.backgroundTexture) {
+        for (IGuiTexture backgroundTexture : this.backgroundTexture) {
             backgroundTexture.draw(pos.x + 1, pos.y + 1, size.width - 2, size.height - 2);
             backgroundTexture.draw(pos.x + 1, pos.y + 1, size.width - 2, size.height - 2);
         }

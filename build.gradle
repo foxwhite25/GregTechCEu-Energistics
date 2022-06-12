@@ -59,6 +59,8 @@ dependencies {
     deobfCompile "gregtechce:gregtech:1.12.2:1.16.1.753"
     deobfCompile "curse.maven:applied-energistics-2-223794:2747063"
     deobfCompile "mezz.jei:jei_1.12.2:4.15.0.291"
+
+    provided files("libs/gregtech-1.12.2-2.3.0-beta.jar")
 }
 
 processResources {

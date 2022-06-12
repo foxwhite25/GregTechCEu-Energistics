@@ -35,11 +35,16 @@ public class CoverBehaviors {
 				(tile, side) -> new CoverAE2Stocker(tile, side, tier, maxStockCount));
 	}
 
-	public static void registerBehavior(int idOffset, ResourceLocation coverId,
-			MetaItem<?>.MetaValueItem placerItem, BiFunction<ICoverable, EnumFacing, CoverBehavior> behaviorCreator) {
-		CoverDefinition coverDefinition = new CoverDefinition(coverId, behaviorCreator, placerItem.getStackForm());
-		CoverDefinition.registerCover(startingCoverId + idOffset, coverDefinition);
-		//noinspection deprecation // Using deprecation fields allows for compatibility with older GTCE versions
-		placerItem.addStats(new PlayerCoverPlaceBehavior(coverDefinition));
+	public static void registerBehavior(
+			int idOffset, ResourceLocation coverId,
+			MetaItem<?>.MetaValueItem placerItem,
+			BiFunction<ICoverable, EnumFacing, CoverBehavior> behaviorCreator
+	) {
+		gregtech.common.covers.CoverBehaviors.registerBehavior(
+				startingCoverId + idOffset,
+				coverId,
+				placerItem,
+				behaviorCreator
+		);
 	}
 }
