@@ -38,6 +38,6 @@ public class StockerTerminalBehavior implements IItemBehaviour, IPartProvider, I
     @Override
     public ModelResourceLocation getModel() {
         AEApi.instance().registries().partModels().registerModels(StockerTerminalPart.MODELS);
-        return new ModelResourceLocation(GregTechEnergisticsMod.MODID + ":part/stocker.terminal");
+        return new ModelResourceLocation(GregTechEnergisticsMod.MODID + "part/stocker.terminal");
     }
 }

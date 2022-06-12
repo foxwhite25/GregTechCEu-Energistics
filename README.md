@@ -1,5 +1,13 @@
 # GregTech Energistics
 
+# This is a port for GTCEu, 
+
+* The stocker cover and Fluid encoder works functionally.
+* But there is some bugs like the pattern will disappear visually when it is in the cover slot.
+* Stocker terminal does not work at all
+
+To be honest with you, I have no idea what's wrong, if you can fix it, PR is welcomed.
+
 ## Description
 Adds GregTech Community Edition and Applied Energistics 2 items/block to add additional interoperability.
 

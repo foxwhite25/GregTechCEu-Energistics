@@ -33,9 +33,9 @@ public class CraftingTracker implements INBTSerializable<NBTTagCompound> {
     }
 
     // Returns true if a job has successfully been fired off. May need to be called multiple times.
-    public boolean handleCrafting(final IAEItemStack requestedItem, final ICraftingGrid craftingGrid, final World world, final IGrid grid) {
+    public void handleCrafting(final IAEItemStack requestedItem, final ICraftingGrid craftingGrid, final World world, final IGrid grid) {
         if (requestedItem == null)
-            return false;
+            return;
 
         // Case 1: Job has already been fired off and the crafting grid is trying to complete the request
         ICraftingLink existingLink = getLink(requestedItem);
@@ -43,7 +43,7 @@ public class CraftingTracker implements INBTSerializable<NBTTagCompound> {
             if (existingLink.isDone() || existingLink.isCanceled())
                 removeLink(requestedItem);
 
-            return false;
+            return;
         }
 
         // Case 2: Job is being calculated but has not been fired off
@@ -53,7 +53,7 @@ public class CraftingTracker implements INBTSerializable<NBTTagCompound> {
                 if (craftingJobFuture.isDone()) {
                     ICraftingJob craftingJob = craftingJobFuture.get();
                     if (craftingJob == null)
-                        return false;
+                        return;
 
                     final ICraftingLink newLink =
                             craftingGrid.submitJob(craftingJob, requester, null, false, source);
@@ -61,21 +61,20 @@ public class CraftingTracker implements INBTSerializable<NBTTagCompound> {
                     removeJob(requestedItem);
 
                     if (newLink == null)
-                        return false;
+                        return;
 
                     addLink(requestedItem, newLink);
-                    return true;
+                    return;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                return false;
+                return;
             }
         }
 
         // Case 3: Job has not been calculated (or fired off)
         IAEItemStack jobStack = requestedItem.copy();
         addJob(jobStack, craftingGrid.beginCraftingJob(world, grid, source, jobStack, null));
-        return false;
     }
 
     public ImmutableSet<ICraftingLink> getRequestedJobs() {
